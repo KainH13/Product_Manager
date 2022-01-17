@@ -33,7 +33,7 @@ const AddProductForm = (props) => {
     };
 
     return (
-        <div className="border rounded p-2">
+        <div className="border rounded p-2 m-5">
             <h2 className="text-center">Add a Product</h2>
             <form onSubmit={submitHandler}>
                 <div className="mb-3">

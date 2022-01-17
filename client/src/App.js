@@ -2,7 +2,8 @@ import React from "react";
 import { Router } from "@reach/router";
 
 // views
-import NewProduct from "./views/NewProduct";
+import Home from "./views/Home";
+import Detail from "./views/Detail";
 
 // bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -11,7 +12,8 @@ function App() {
     return (
         <div className="App">
             <Router>
-                <NewProduct path="/" />
+                <Home path="/" />
+                <Detail path="/products/:id" />
             </Router>
         </div>
     );
