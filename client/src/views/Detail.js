@@ -4,12 +4,15 @@ import React from "react";
 import ProductDetails from "../components/ProductDetails";
 
 const Home = (props) => {
-    const { id } = props;
+    const { id, deleteProduct } = props;
 
     return (
         <div>
             <h1 className="text-center">Product Details</h1>
-            <ProductDetails id={id}/>
+            <ProductDetails
+                id={id}
+                deleteProduct={deleteProduct}
+            />
         </div>
     );
 };

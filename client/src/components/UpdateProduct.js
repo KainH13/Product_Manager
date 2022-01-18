@@ -1,45 +1,46 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { navigate } from "@reach/router";
 
-const AddProductForm = (props) => {
-    const { products, setProducts } = props;
+const Update = (props) => {
+    const { id } = props;
 
-    // form values
-    const [title, setTitle] = useState("");
-    const [price, setPrice] = useState(0);
-    const [description, setDescription] = useState("");
+    // state holding current values
+    const [title, setTitle] = useState();
+    const [price, setPrice] = useState();
+    const [description, setDescription] = useState();
 
-    // form submission
-    const submitHandler = (e) => {
-        e.preventDefault();
-
-        // send new product data to server for storage
+    useEffect(() => {
         axios
-            .post("http://localhost:8000/api/products", {
-                title,
-                price,
-                description,
-            })
+            .get(`http://localhost:8000/api/products/${id}`)
             .then((res) => {
-                console.log(res);
-                console.log(res.data);
-                // add to product state so that page shows changes in real time
-                setProducts([...products, res.data]);
+                setTitle(res.data.title);
+                setPrice(res.data.price);
+                setDescription(res.data.description);
             })
             .catch((err) => {
                 console.log(err);
             });
+    }, []);
 
-        // clear form fields for a new entry
-        setTitle("");
-        setPrice(0);
-        setDescription("");
+    const updateProduct = (e) => {
+        e.preventDefault();
+        axios
+            .put(`http://localhost:8000/api/products/${id}`, {
+                title,
+                price,
+                description,
+            })
+            .then((res) => console.log(res))
+            .catch((err) => console.log(err));
+
+        navigate("/");
     };
 
     return (
         <div className="border rounded p-2 m-5">
             <h2 className="text-center">Add a Product</h2>
-            <form onSubmit={submitHandler}>
+            <form onSubmit={updateProduct}>
                 <div className="mb-3">
                     <label htmlFor="title" className="form-label">
                         Title:
@@ -90,7 +91,7 @@ const AddProductForm = (props) => {
                 </button>
             </form>
         </div>
-    );
+    )
 };
 
-export default AddProductForm;
+export default Update;
