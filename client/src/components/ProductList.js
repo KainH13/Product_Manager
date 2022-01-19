@@ -1,21 +1,8 @@
-import React, { useEffect } from "react";
-import axios from "axios";
+import React from "react";
 import { Link } from "@reach/router";
 
 const ProductList = (props) => {
-    const { products, setProducts, deleteProduct } = props;
-
-    useEffect(() => {
-        axios
-            .get("http://localhost:8000/api/products")
-            .then((res) => {
-                console.log(res.data);
-                setProducts(res.data);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    }, []);
+    const { products, deleteProduct } = props;
 
     return (
         <div>
