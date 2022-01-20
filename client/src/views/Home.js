@@ -35,19 +35,9 @@ const Home = (props) => {
             .catch((err) => console.log(err));
     };
 
-    // product deletion logic
+    // product deletion success action
     const removeFromDom = (productID) => {
         setProducts(products.filter((product) => product._id !== productID));
-    };
-
-    const deleteProduct = (productID) => {
-        axios
-            .delete(`http://localhost:8000/api/products/${productID}`)
-            .then((res) => {
-                console.log(res.data);
-                removeFromDom(productID);
-            })
-            .catch((err) => console.log(err));
     };
 
     return (
@@ -62,7 +52,7 @@ const Home = (props) => {
             {loaded && (
                 <ProductList
                     products={products}
-                    deleteProduct={deleteProduct}
+                    removeFromDom={removeFromDom}
                 />
             )}
         </div>

@@ -1,8 +1,11 @@
 import React from "react";
 import { Link } from "@reach/router";
 
+// components
+import DeleteButton from "./DeleteButton";
+
 const ProductList = (props) => {
-    const { products, deleteProduct } = props;
+    const { products, removeFromDom } = props;
 
     return (
         <div>
@@ -27,14 +30,10 @@ const ProductList = (props) => {
                             >
                                 Update
                             </Link>
-                            <button
-                                className="btn btn-outline-danger mx-5"
-                                onClick={(e) => {
-                                    deleteProduct(product._id);
-                                }}
-                            >
-                                Delete
-                            </button>
+                            <DeleteButton
+                                productID={product._id}
+                                successAction={() => removeFromDom(product._id)}
+                            />
                         </div>
                     </div>
                 );
