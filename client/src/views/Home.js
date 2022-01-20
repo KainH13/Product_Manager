@@ -8,6 +8,8 @@ import ProductList from "../components/ProductList";
 const Home = (props) => {
     // add all products into state
     const [products, setProducts] = useState([]);
+    // so product list will not try to load before products state is populated
+    const [loaded, setLoaded] = useState(false);
 
     useEffect(() => {
         axios
@@ -15,6 +17,7 @@ const Home = (props) => {
             .then((res) => {
                 console.log(res.data);
                 setProducts(res.data);
+                setLoaded(true);
             })
             .catch((err) => {
                 console.log(err);
@@ -56,7 +59,12 @@ const Home = (props) => {
                 initialDescription=""
                 onSubmitAction={createProduct}
             />
-            <ProductList products={products} deleteProduct={deleteProduct} />
+            {loaded && (
+                <ProductList
+                    products={products}
+                    deleteProduct={deleteProduct}
+                />
+            )}
         </div>
     );
 };

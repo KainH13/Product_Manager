@@ -4,7 +4,7 @@ import { Router } from "@reach/router";
 // views
 import Home from "./views/Home";
 import Detail from "./views/Detail";
-import Update from "./components/UpdateProduct";
+import Update from "./views/Update";
 
 // bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
