@@ -10,6 +10,8 @@ const Home = (props) => {
     const [products, setProducts] = useState([]);
     // so product list will not try to load before products state is populated
     const [loaded, setLoaded] = useState(false);
+    // store errors from backend validation
+    const [errors, setErrors] = useState([]);
 
     useEffect(() => {
         axios
@@ -32,7 +34,10 @@ const Home = (props) => {
                 console.log(res.data);
                 setProducts([...products, res.data]);
             })
-            .catch((err) => console.log(err));
+            .catch((err) => {
+                console.log(err);
+                setErrors(err.response.data.errors);
+            });
     };
 
     // product deletion success action
@@ -48,6 +53,7 @@ const Home = (props) => {
                 initialPrice=""
                 initialDescription=""
                 onSubmitAction={createProduct}
+                errors={errors}
             />
             {loaded && (
                 <ProductList

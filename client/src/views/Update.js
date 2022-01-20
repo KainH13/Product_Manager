@@ -12,6 +12,8 @@ const Update = (props) => {
     const [product, setProduct] = useState();
     // so page will not load before data is in product state
     const [loaded, setLoaded] = useState(false);
+    // store errors for validation failures
+    const [errors, setErrors] = useState([]);
 
     useEffect(() => {
         axios
@@ -31,7 +33,10 @@ const Update = (props) => {
         axios
             .put(`http://localhost:8000/api/products/${id}`, product)
             .then((res) => console.log(res))
-            .catch((err) => console.log(err));
+            .catch((err) => {
+                console.log(err);
+                setErrors(err.response.data.errors);
+            });
 
         navigate("/");
     };
@@ -45,6 +50,7 @@ const Update = (props) => {
                     initialPrice={product.price}
                     initialDescription={product.description}
                     onSubmitAction={updateProduct}
+                    errors={errors}
                 />
             )}
         </div>

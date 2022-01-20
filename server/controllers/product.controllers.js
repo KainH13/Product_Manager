@@ -9,7 +9,7 @@ module.exports = {
             })
             .catch((err) => {
                 console.log("Find All failed");
-                res.json({ message: "Something went wrong", error: err });
+                res.status(400).json(err);
             });
     },
 
@@ -21,7 +21,7 @@ module.exports = {
             })
             .catch((err) => {
                 console.log("Find One failed");
-                res.json({ message: "Something went wrong", error: err });
+                res.status(400).json(err);
             });
     },
 
@@ -33,7 +33,7 @@ module.exports = {
             })
             .catch((err) => {
                 console.log("Create failed");
-                res.json({ message: "Something went wrong", error: err });
+                res.status(400).json(err);
             });
     },
 
@@ -48,7 +48,7 @@ module.exports = {
             })
             .catch((err) => {
                 console.log("Update failed");
-                res.json({ message: "Something went wrong", error: err });
+                res.status(400).json(err);
             });
     },
 
@@ -60,7 +60,7 @@ module.exports = {
             })
             .catch((err) => {
                 console.log("Delete failed");
-                res.json({ message: "Something went wrong", error: err });
+                res.status(400).json(err);
             });
     },
 };

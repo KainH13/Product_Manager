@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 
-const AddProductForm = (props) => {
-    const { initialTitle, initialPrice, initialDescription, onSubmitAction } = props;
+const ProductForm = (props) => {
+    const {
+        initialTitle,
+        initialPrice,
+        initialDescription,
+        onSubmitAction,
+        errors,
+    } = props;
 
     // form values
     const [title, setTitle] = useState(initialTitle);
@@ -14,7 +20,7 @@ const AddProductForm = (props) => {
         onSubmitAction({
             title,
             price,
-            description
+            description,
         });
 
         // clear form fields for a new entry
@@ -40,6 +46,11 @@ const AddProductForm = (props) => {
                             setTitle(e.target.value);
                         }}
                     />
+                    {errors.title ? (
+                        <div className="alert alert-danger my-1">
+                            {errors.title.message}
+                        </div>
+                    ) : null}
                 </div>
                 <div className="mb-3">
                     <label htmlFor="Price" className="form-label">
@@ -54,6 +65,11 @@ const AddProductForm = (props) => {
                             setPrice(e.target.value);
                         }}
                     />
+                    {errors.price ? (
+                        <div className="alert alert-danger my-1">
+                            {errors.price.message}
+                        </div>
+                    ) : null}
                 </div>
                 <div className="mb-3">
                     <label htmlFor="description" className="form-label">
@@ -71,6 +87,11 @@ const AddProductForm = (props) => {
                             setDescription(e.target.value);
                         }}
                     ></textarea>
+                    {errors.description ? (
+                        <div className="alert alert-danger my-1">
+                            {errors.description.message}
+                        </div>
+                    ) : null}
                 </div>
                 <button type="submit" className="btn btn-primary">
                     Submit
@@ -80,4 +101,4 @@ const AddProductForm = (props) => {
     );
 };
 
-export default AddProductForm;
+export default ProductForm;
