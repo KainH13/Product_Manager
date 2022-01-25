@@ -8,8 +8,6 @@ import ProductList from "../components/ProductList";
 const Home = (props) => {
     // add all products into state
     const [products, setProducts] = useState([]);
-    // so product list will not try to load before products state is populated
-    const [loaded, setLoaded] = useState(false);
     // store errors from backend validation
     const [errors, setErrors] = useState([]);
 
@@ -19,7 +17,6 @@ const Home = (props) => {
             .then((res) => {
                 console.log(res.data);
                 setProducts(res.data);
-                setLoaded(true);
             })
             .catch((err) => {
                 console.log(err);
@@ -55,12 +52,10 @@ const Home = (props) => {
                 onSubmitAction={createProduct}
                 errors={errors}
             />
-            {loaded && (
-                <ProductList
-                    products={products}
-                    removeFromDom={removeFromDom}
-                />
-            )}
+            <ProductList
+                products={products}
+                removeFromDom={removeFromDom}
+            />
         </div>
     );
 };
